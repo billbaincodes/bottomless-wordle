@@ -1,0 +1,26 @@
+{
+  "name": "wordle",
+  "version": "1.0.0",
+  "description": "Because once a day just isn't enough",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha ./test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billbaincodes/bottomless-wordle.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "billy b",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billbaincodes/bottomless-wordle/issues"
+  },
+  "homepage": "https://github.com/billbaincodes/bottomless-wordle#readme",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.0"
+  }
+}
