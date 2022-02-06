@@ -9,7 +9,9 @@ let puzzle6 = { answer: 'zeezz', guess: 'eqeee', }
 let { answer, guess } = puzzle5;
 
 // Check that word!!
-wordChecker = (answer, guess) => {
+const wordChecker = (answer, guess) => {
+
+  console.log({ answer, guess });
 
   // Split strings into arrays
   let answerArr = answer.split('');
@@ -46,17 +48,8 @@ wordChecker = (answer, guess) => {
 
     // YELLOW
     else if (
-      answerArr.includes(guessedLetter) && ( /*Word contains letter*/
-        !greenCount[guessedLetter] || /*  */
-        greenCount[guessedLetter] < answerCount[guessedLetter] /* Our greens don't outnumber total occurrences of letter in answer */
-      ) && (
-        !yellowCount[guessedLetter] || 
-        yellowCount[guessedLetter] < answerCount[guessedLetter] /* Our yellows don't outnumber total occurrences of letter in answer */
-      ) 
-      &&
-      (
-        (greenCount[guessedLetter] || 0) + (yellowCount[guessedLetter] || 0) < answerCount[guessedLetter]
-      )
+      answerArr.includes(guessedLetter) && 
+      (greenCount[guessedLetter] || 0) + (yellowCount[guessedLetter] || 0) < answerCount[guessedLetter]
     ) {
 
       // We found a yellow, add to our count
@@ -80,8 +73,6 @@ wordChecker = (answer, guess) => {
 
   // return result;
 
-
-
   // Green
   // Correct letter is in correct position
 
@@ -102,11 +93,13 @@ wordChecker = (answer, guess) => {
 
 }
 
+module.exports = wordChecker;
 
 
-let result = wordChecker(answer, guess);
 
-console.log({ answer, guess, result });
+// let result = wordChecker(answer, guess);
+
+// console.log({ answer, guess, result });
 
 
 
