@@ -9,7 +9,7 @@ let puzzle6 = { answer: 'zeezz', guess: 'eqeee', }
 let { answer, guess } = puzzle5;
 
 // Check that word!!
-const wordChecker = (answer, guess) => {
+export const wordChecker = (answer, guess) => {
 
   console.log({ answer, guess });
 
@@ -24,54 +24,46 @@ const wordChecker = (answer, guess) => {
     return accum;
   }, {})
 
-  // We need to know how many greens exist before we can start solving
-  let greenCount = {}
+  // Track how many times each letter has been guessed
+  let guessCount = {};
 
-  // Find those greens
+  // We need to know greens ahead of time to solve
   answerArr.map((correctLetter, i) => {
     let guessedLetter = guessArr[i];
     if (guessedLetter === correctLetter) {
-      if (!greenCount[correctLetter]) { greenCount[correctLetter] = 1 } 
-      else if (greenCount[correctLetter]) { greenCount[correctLetter]++ }
+      if (!guessCount[correctLetter]) { guessCount[correctLetter] = 1 } 
+      else if (guessCount[correctLetter]) { guessCount[correctLetter]++ }
     }
   })
-
-  // We can track yellows while solving puzzle
-  let yellowCount = {}
 
   // Solve the puzzle
   return answerArr.reduce((accum, correctLetter, i) => {
     let guessedLetter = guessArr[i];
 
     // GREEN
-    if ( guessedLetter === correctLetter ) { accum.push('green') }
+    if ( guessedLetter === correctLetter ) { accum.push('green'); }
 
     // YELLOW
     else if (
       answerArr.includes(guessedLetter) && 
-      (greenCount[guessedLetter] || 0) + (yellowCount[guessedLetter] || 0) < answerCount[guessedLetter]
+      (guessCount[guessedLetter] || 0) < answerCount[guessedLetter]
     ) {
 
       // We found a yellow, add to our count
-      if (!yellowCount[guessedLetter]) { yellowCount[guessedLetter] = 1 }
-      else if (yellowCount[guessedLetter]) { yellowCount[guessedLetter]++ } 
+      if (!guessCount[guessedLetter]) { guessCount[guessedLetter] = 1 }
+      else if (guessCount[guessedLetter]) { guessCount[guessedLetter]++ } 
 
       // Push yellow to answer
       accum.push('yellow');
     }
 
     // GRAY
-    else {
-      // Push grey to answer
-      accum.push('grey')
-    }
+    else { accum.push('grey'); }
 
     // Return the accumulator
     return accum;
 
   }, []);
-
-  // return result;
 
   // Green
   // Correct letter is in correct position
@@ -93,7 +85,7 @@ const wordChecker = (answer, guess) => {
 
 }
 
-module.exports = wordChecker;
+// module.exports = wordChecker;
 
 
 
