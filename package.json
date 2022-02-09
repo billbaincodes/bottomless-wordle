@@ -4,7 +4,8 @@
   "description": "Because once a day just isn't enough",
   "main": "app.js",
   "scripts": {
-    "test": "mocha ./test.js"
+    "test": "mocha ./test.js",
+    "dev": "npx lite-server"
   },
   "repository": {
     "type": "git",
