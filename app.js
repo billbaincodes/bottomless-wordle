@@ -54,18 +54,18 @@ submitBtn.addEventListener('click', async (e) => {
   if (!result.includes('grey') && !result.includes('yellow')) {
     setTimeout(() => {
       alert('You Win!');
-    }, 1000);
+    }, 2300);
     submitBtn.setAttribute('disabled', true);
     wordField.setAttribute('disabled', true);
     return;
   }
-
+  // Check if they used up all attempts
   if (attempt == 4) {
     submitBtn.setAttribute('disabled', true);
     wordField.setAttribute('disabled', true);
     setTimeout(() => {
       alert('Better luck next time!');
-    }, 1000);
+    }, 2300);
   }
 
   // Increment attempt number
@@ -106,7 +106,9 @@ const colorLetters = async (colorList) => {
   let letters = getLetters(attempt);
   // Update each span with corresponding letter
   for (let i = 0; i < letters.length; i++) {
-    letters[i].setAttribute('class', `letter ${(colorList[i] || '')}`);
+    setTimeout(() => {
+      letters[i].setAttribute('class', `letter ${(colorList[i] || '')} flip`);
+    }, i * 350);
   }
 
 }

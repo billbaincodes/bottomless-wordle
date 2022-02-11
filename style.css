@@ -89,3 +89,23 @@ h3 {
     transform: translate(0, 0);
   }
 }
+
+.flip {
+  animation: flip .8s
+}
+
+@keyframes flip {
+  from {
+    /* background-color: pink; */
+    transform: scaleY(1);
+  }
+
+  50%{
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+    /* background-color: pink; */
+  }
+}
