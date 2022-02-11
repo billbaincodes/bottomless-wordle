@@ -57,3 +57,35 @@ h3 {
 .word-select {
   margin-top: 1rem;
 }
+
+.flash > span {
+  animation-duration: .8s;
+  animation-name: red-flash;
+}
+
+@keyframes red-flash {
+  from {
+    border-color: gray;
+    transform: translate(0, 0);
+  }
+
+  25% {
+    border-color:red;
+    transform: translate(-5px, 0);
+  }
+
+  50% {
+    border-color: gray;
+    transform: translate(5px, 0);
+  }
+
+  75% {
+    border-color: red;
+    transform: translate(-5px, 0);
+  }
+
+  to {
+    border-color: gray;
+    transform: translate(0, 0);
+  }
+}

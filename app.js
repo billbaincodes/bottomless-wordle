@@ -30,18 +30,22 @@ const wordGetter = async (wordIndex) => {
 
 // Add submit listener
 submitBtn.addEventListener('click', async (e) => {
+  // Check if they played a valid word
   let isWord = await checkWordExists(guess);
-
+  // If not flash red
   if (!isWord) { 
-    alert('that aint a word!')
+    // Capture current attempt
+    let attemptDiv = document.getElementById(`attempt_${attempt}`);;
+    // Reset class in case invalid word already guessed once
+    attemptDiv.setAttribute('class', 'attempt');
+    // Add the flash animation
+    setTimeout(() => { attemptDiv.setAttribute('class', 'attempt flash'); }, 50);
     return; 
   }
-
   // Check their word!
   let result = wordChecker(answer, guess);
   // Color the tiles appropriately
   colorLetters(result);
-
   // Clear the guess input
   wordField.value = '';
   // Clear the guess
