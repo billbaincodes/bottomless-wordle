@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 <body>
+  <h1>Wordle for Lyss</h1>
+  <h3 id="word-counter">Playing Word x of y</h3>
   <div class='board'>
     <div id='attempt_0' class="attempt">
       <span class='letter' id='letter'></span>
@@ -50,13 +52,15 @@
     </div>
   </div>
 
-  <br />
-  <input type="text" name="word-field" id="word-field" maxlength="5">
+  <div class="'player-input">
+    <input type="text" name="word-field" id="word-field" maxlength="5">
+    <button id='submit-btn'>Submit</button>
+  </div>
 
-  <button id='submit-btn'>Submit</button>
-
-  <button id="prev-word">Previous Word</button>
-  <button id="next-word">Next Word</button>
+  <div class="word-select">
+    <button id="prev-word">Previous Word</button>
+    <button id="next-word">Next Word</button>
+  </div>
 
   <script type="module" src="./app.js"></script>
 </body>
