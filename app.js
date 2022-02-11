@@ -6,8 +6,6 @@ import { wordChecker } from './logic.js';
 let index = localStorage.getItem('wordIndex');
 if (!index) { localStorage.setItem('wordIndex', '0') }
 
-console.log({ index });
-
 // Init variables
 let answer = ''
 let guess = '';
@@ -17,6 +15,7 @@ let submitBtn = document.getElementById("submit-btn");
 let wordField = document.getElementById("word-field");
 let nextBtn = document.getElementById("next-word");
 let prevBtn = document.getElementById("prev-word");
+let wordCounter = document.getElementById("word-counter");
 
 const wordGetter = async (wordIndex) => {
 
@@ -31,10 +30,6 @@ const wordGetter = async (wordIndex) => {
 
 // Add submit listener
 submitBtn.addEventListener('click', async (e) => {
-  console.log('fired!')
-  // Do nothing if past max number of attempts
-  if (attempt >= 4) return;
-
   let isWord = await checkWordExists(guess);
 
   if (!isWord) { 
@@ -55,11 +50,20 @@ submitBtn.addEventListener('click', async (e) => {
   if (!result.includes('grey') && !result.includes('yellow')) {
     setTimeout(() => {
       alert('You Win!');
-    }, 1500);
+    }, 1000);
     submitBtn.setAttribute('disabled', true);
     wordField.setAttribute('disabled', true);
     return;
   }
+
+  if (attempt == 4) {
+    submitBtn.setAttribute('disabled', true);
+    wordField.setAttribute('disabled', true);
+    setTimeout(() => {
+      alert('Better luck next time!');
+    }, 1000);
+  }
+
   // Increment attempt number
   attempt++
 });
@@ -124,18 +128,15 @@ const resetBoard = () => {
   wordField.removeAttribute('disabled');
   // Reset attempt number
   attempt = 0;
-
-  if (index == 0) {
-    prevBtn.setAttribute('disabled', true)
-  } else {
-    prevBtn.removeAttribute('disabled');
-  }
-
-  if (index == wordList.length) {
-    nextBtn.setAttribute('disabled', true);
-  } else {
-    nextBtn.removeAttribute('disabled')
-  }
+  // Reset guess
+  wordField.value = '';
+  // Dis/enable buttons if index is at max or min
+  if (index == 0) { prevBtn.setAttribute('disabled', true) }
+  else { prevBtn.removeAttribute('disabled'); }
+  if (index == wordList.length) { nextBtn.setAttribute('disabled', true); }
+  else { nextBtn.removeAttribute('disabled'); }
+  // Set word counter
+  wordCounter.innerText = `Playing word ${index} of ${wordList.length}`
 }
 
 const nextWord = () => {
@@ -172,16 +173,11 @@ const checkWordExists = async (word) => {
 
 
 
-// checkWordExists();
-
-
+// Get the first word and clean board
 const run = async () => {
   await wordGetter(index);
   resetBoard()
 }
-// resetBoard();
-// Get a word to play
-// wordGetter(index);
 
+// Let's Wordle!!
 run();
-
