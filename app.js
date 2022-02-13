@@ -142,7 +142,7 @@ const resetBoard = () => {
   if (index == wordList.length) { nextBtn.setAttribute('disabled', true); }
   else { nextBtn.removeAttribute('disabled'); }
   // Set word counter
-  wordCounter.innerText = `Playing word ${index} of ${wordList.length}`
+  wordCounter.innerText = `Playing word ${Number(index) + 1} of ${wordList.length}`
 }
 
 const nextWord = () => {
@@ -150,16 +150,13 @@ const nextWord = () => {
   localStorage.setItem("wordIndex", index);
   answer = (wordList[index]).toUpperCase();
   resetBoard();
-  console.log({answer})
 }
 
 const prevWord = () => {
-
   index--
   localStorage.setItem("wordIndex", index);
   answer = (wordList[index]).toUpperCase();
   resetBoard();
-  console.log({answer})
 }
 
 
@@ -176,8 +173,6 @@ const checkWordExists = async (word) => {
   console.log('is it a word?', Array.isArray(isWord))
   return Array.isArray(isWord);
 }
-
-
 
 // Get the first word and clean board
 const run = async () => {
