@@ -4,7 +4,12 @@ import { wordChecker } from './logic.js';
 
 // Store/retrieve index
 let index = localStorage.getItem('wordIndex');
-if (!index) { localStorage.setItem('wordIndex', '0') }
+
+// Init at zero
+if (!index) { 
+  localStorage.setItem('wordIndex', '0');
+  index = 0;
+}
 
 // Init variables
 let answer = ''
